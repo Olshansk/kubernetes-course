@@ -31,3 +31,19 @@ Flow of a request:
 4. Kubernetes node forwards traffic to the appropriate pod
 4.1 There is one yaml file per pod
 4.2 There is a spec for each container within a pod (a list inside the yaml file)
+
+### Lecture 27
+- Stateless application are much easier to scale horizontally
+- Kubernetes containers are stateless (cannot be saved locally)
+-- All session management needs to be done outside the container (object storage, database, etc...)
+- Volumes can be used to run stateful apps
+-- These containers are often scaled vertically rather than horizontally
+- ReplicationController used to replicate pods
+
+### Lecture 28
+- Find everything via: `kubectl get <nodes,service,deployments,pods,replicationcontrollers>`
+- Easily delete pods via `kubectl delete pod <pod_name>`
+-- The ReplicationController will automatically rescale
+- Easily scale up/down via `kubectl scale --replicas=5 -f <filename>`
+- Easily scale up/down via `kubectl scale --replicas=5 -f <filename>`
+- Deleteing a replication controller: `kubectl delete rc helloworld-controller`
