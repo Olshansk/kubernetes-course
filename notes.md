@@ -47,3 +47,18 @@ Flow of a request:
 - Easily scale up/down via `kubectl scale --replicas=5 -f <filename>`
 - Easily scale up/down via `kubectl scale --replicas=5 -f <filename>`
 - Deleteing a replication controller: `kubectl delete rc helloworld-controller`
+
+### Lecture 29
+- Replica Set is a Replication controller with a bunch of extra filters
+- Deployments are substitute for replication controllers/sets
+-- Define a state and the deployment object makes sure the state is maintained
+-- Create/Update/RollingUpdate
+- Command cheatsheet:
+-- kubectl get Deployments
+-- kubectl get rs
+-- kubectl get pods
+-- kubectl set image <deployment>
+-- kubectl edit <deployment>
+-- kubectl rollout status <deployment>
+-- kubectl rollout history <deployment>
+-- kubectl rollout undo <deployment>
