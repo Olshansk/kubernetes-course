@@ -38,7 +38,7 @@ Flow of a request:
 -- All session management needs to be done outside the container (object storage, database, etc...)
 - Volumes can be used to run stateful apps
 -- These containers are often scaled vertically rather than horizontally
-- ReplicationController used to replicate pods
+- ReplicationController u sed to replicate pods
 
 ### Lecture 28
 - Find everything via: `kubectl get <nodes,service,deployments,pods,replicationcontrollers>`
@@ -62,3 +62,19 @@ Flow of a request:
 -- kubectl rollout status <deployment>
 -- kubectl rollout history <deployment>
 -- kubectl rollout undo <deployment>
+
+
+### Lecture 30
+The takeaway is that it is easy to do rollouts, undo rollouts and jump
+back and forth between versions by only changing the image and doing/undoing
+rollouts.
+
+$ minikube service helloworld-deployment --url
+$ curl -X get http://192.168.64.2:30988
+$ curl http://192.168.64.2:30988
+$ kubectl set image deployment/helloworld-deployment k8s-demo=wardviaene/k8s-demo:2
+$ kubectl rollout status  deployment/helloworld-deployment
+$ kubectl rollout history
+$ kubectl rollout undo deployment/helloworld-deployment
+$ kubectl rollout history deployment/helloworld-deployment
+$ kubectl get pods --show-labels
