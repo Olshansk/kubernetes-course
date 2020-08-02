@@ -32,7 +32,7 @@ Flow of a request:
 4.1 There is one yaml file per pod
 4.2 There is a spec for each container within a pod (a list inside the yaml file)
 
-### Lecture 27
+### Lecture 27 - Replication controller theory
 - Stateless application are much easier to scale horizontally
 - Kubernetes containers are stateless (cannot be saved locally)
 -- All session management needs to be done outside the container (object storage, database, etc...)
@@ -40,7 +40,7 @@ Flow of a request:
 -- These containers are often scaled vertically rather than horizontally
 - ReplicationController u sed to replicate pods
 
-### Lecture 28
+### Lecture 28 - Replication controller demo
 - Find everything via: `kubectl get <nodes,service,deployments,pods,replicationcontrollers>`
 - Easily delete pods via `kubectl delete pod <pod_name>`
 -- The ReplicationController will automatically rescale
@@ -48,7 +48,7 @@ Flow of a request:
 - Easily scale up/down via `kubectl scale --replicas=5 -f <filename>`
 - Deleteing a replication controller: `kubectl delete rc helloworld-controller`
 
-### Lecture 29
+### Lecture 29 - Deployment theory
 - Replica Set is a Replication controller with a bunch of extra filters
 - Deployments are substitute for replication controllers/sets
 -- Define a state and the deployment object makes sure the state is maintained
@@ -64,7 +64,7 @@ Flow of a request:
 -- kubectl rollout undo <deployment>
 
 
-### Lecture 30
+### Lecture 30 - Deployment demo
 The takeaway is that it is easy to do rollouts, undo rollouts and jump
 back and forth between versions by only changing the image and doing/undoing
 rollouts.
@@ -78,3 +78,21 @@ $ kubectl rollout history
 $ kubectl rollout undo deployment/helloworld-deployment
 $ kubectl rollout history deployment/helloworld-deployment
 $ kubectl get pods --show-labels
+
+### Lecture 31 - Service Theory
+- Pods are only accessible via a service
+- Creating a service === creating an endpoint for the pod
+- ClusterIP: Virtual IP address. Reachable only from within the cluster.
+- NodePort: Same port on each node. Reachable externally.
+- LoadBalancer: LoadBalancer by cloud provider (e.g. ELB on AWS) routes traffic to nodeports.
+- DNS names:
+-- External name: only enabled if DNS add-on is defined
+- Reminder to self:
+-- One pod can hold many containers
+-- There is one "spec" definition in a yaml file for each container within a pod
+-- Having a one-to-one mapping between pods and containers is a common practice
+   but it is not mandatory and there are lots of use cases that avoid this
+- Service can only run between ports 30000-32767
+
+### Lecture 32 - Service Demo
+-
