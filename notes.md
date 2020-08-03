@@ -95,4 +95,23 @@ $ kubectl get pods --show-labels
 - Service can only run between ports 30000-32767
 
 ### Lecture 32 - Service Demo
--
+Pretty straight forward, but just here are the main commands:
+- kubectl get services
+- kubectl get svc
+- kubectl describe svc helloworld-service
+
+### Lecture 33 - Labels Theory
+- Same as tags in AWS
+- Simply a key/value pair
+- Not unique
+- Label selectors can be used to filter the object (e.g. pod)
+- Nodes:
+-- Can be tagged with a specific label
+-- NodeSelector can be added to pod to run on a specfific node
+
+### Lecture 34 - Labels Demo
+$ kubectl get nodes --show-labels
+$ kubectl describe pod <pod_name> to investigate what's going on
+- Note that if deployment/pod is launched with a node selector, and label
+   has not been set yet, the pod will not run
+$ kubectl label nodes minikube <key>=<value>
