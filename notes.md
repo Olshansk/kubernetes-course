@@ -115,3 +115,22 @@ $ kubectl describe pod <pod_name> to investigate what's going on
 - Note that if deployment/pod is launched with a node selector, and label
    has not been set yet, the pod will not run
 $ kubectl label nodes minikube <key>=<value>
+
+### Lecture 35 - Healthcheck Theory
+- A running pod does not mean a functioning service: need health checks
+- Two options:
+-- Periodic command execution in container
+-- Periodic HTTP request to an endpoint expose by container
+- livenessProbe: configuration for a container spec (in a yaml file) for health checks
+
+### Lecture 35 - Healthcheck Demo
+- After creating the deployment/pod with a livenessProbe, it can be inspected via:
+$ kubectl describe pod <pod_name>
+$ kubectl describe deployment <deployment_name>
+- To adjust the settings of a live <type>, use:
+$ kubectl edit <type> <type_name>
+
+### Lecture 36 - Readiness probe theory
+- Liveness checks if pod is up
+- Readiness checks if pod can accept traffic
+- Example: need to warm up cache, etc...
