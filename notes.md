@@ -123,14 +123,43 @@ $ kubectl label nodes minikube <key>=<value>
 -- Periodic HTTP request to an endpoint expose by container
 - livenessProbe: configuration for a container spec (in a yaml file) for health checks
 
-### Lecture 35 - Healthcheck Demo
+### Lecture 36 - Healthcheck Demo
 - After creating the deployment/pod with a livenessProbe, it can be inspected via:
 $ kubectl describe pod <pod_name>
 $ kubectl describe deployment <deployment_name>
 - To adjust the settings of a live <type>, use:
 $ kubectl edit <type> <type_name>
 
-### Lecture 36 - Readiness probe theory
+### Lecture 37 - Readiness probe theory
 - Liveness checks if pod is up
 - Readiness checks if pod can accept traffic
 - Example: need to warm up cache, etc...
+
+### Lecture 39 - Pod state theory
+- We can view all the namespaces and then get the state
+  of the pods based on the namespace:
+$ kubectl get namespaces
+$ kubectl get pods -n <namespace>
+- PodConditions provides more detail on state of pod (not documenting here)
+- Pod states:
+$ kubectl describe pod <pod_name> -n <namespace>
+-- Pending: accepted but not running. Image is downloading, no resources, etc....
+-- Succeeded: all containers within pod have been terminated.
+-- Failed: at least one container within pod returned failure code.
+- Container state:
+$ kubectl describe pod <pod_name> -n <namespace> -o yaml
+
+### Lecture 40 - Pod lifecycle theory
+- Init container -> start hook -> readiness + liveness probes -> stop hook
+
+### Lecture 41 - Pod lifecycle demo
+- Busybox docker image (https://hub.docker.com/_/busybox) is a tiny image (1-5 Mb)
+  that provides replacements for GNU utilities.
+- Common patterns to investigate what's going on.
+-- Terminal 1:
+  $ watch -n1 kubectl get pods
+-- Terminal 2:
+  $ kubectl create -f <yaml_file>
+-- Terminal 3:
+  $ kubectl exec -it <pod_name> -- tail /timing -f
+- The status of the pod can be watched/followed
