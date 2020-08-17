@@ -1,5 +1,7 @@
 # Personal notes I took while watching the lectures
 
+A great cheatsheet for kubectl: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
 ## Section 2
 
 ### Lecture 5
@@ -163,3 +165,21 @@ $ kubectl describe pod <pod_name> -n <namespace> -o yaml
 -- Terminal 3:
   $ kubectl exec -it <pod_name> -- tail /timing -f
 - The status of the pod can be watched/followed
+
+### Lecture 42 - Secrets theory
+- Way to distribute credentials, keys, password, etc...
+- 3 options: External image, environment variables or files (volumes, file, dotenv files, etc...)
+- Create a secret:
+$ kubectl create secret generic db-user-pass --from-file=./username.txt --from-file=./password.txt
+- Check secrets:
+$ kubectl get secrets
+- Creating secrets can be done using YAML files with `kind: Secret`
+- Spec container can be updated to have an environment variable with `valueFrom` `secretKeyRef`
+- `volumeMounts` is the other option for secrets
+
+### Lecture 43 - Secrets Demo
+1. kubectl create -f <secret.yml>
+2. kubectl create -f <pod-with-secrets-mount.yml>
+3. kubectl describe pod <pod_name>  # Check the volume mounts
+4. kubectl exec -it <pod_name> bash  # Enter the pod
+5. cat /etc/creds/<secret_name>  # View the secrets
