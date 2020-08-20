@@ -183,3 +183,18 @@ $ kubectl get secrets
 3. kubectl describe pod <pod_name>  # Check the volume mounts
 4. kubectl exec -it <pod_name> bash  # Enter the pod
 5. cat /etc/creds/<secret_name>  # View the secrets
+
+### Lecture 44 - Wordpress demo
+- Create a "Secrets" yaml file containing namespace
+- For the container spec in a Pod/Deployment type, setup env variables like so:
+name: WORDPRESS_DB_PASSWORD
+valueFrom:
+  secretKeyRef:
+    name: wordpress-secrets
+    key: db-password
+name: WORDPRESS_DB_HOST
+value: 127.0.0.1
+- Recall:
+-- Use `kubectl create -f <>.yaml` to create secrets/deployments/services
+-- Use `kubectl describe <Kind> <Name>` to get information
+-- Use `minikube service wordpress-service --url` to get host:port of local server
