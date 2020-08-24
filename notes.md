@@ -198,3 +198,35 @@ value: 127.0.0.1
 -- Use `kubectl create -f <>.yaml` to create secrets/deployments/services
 -- Use `kubectl describe <Kind> <Name>` to get information
 -- Use `minikube service wordpress-service --url` to get host:port of local server
+
+### Lecture 45 - Web UI
+$ minikube dashboard
+$ minikube dashboard --url
+$ kubectl config view
+
+## Section 3
+
+### Lecture 48 - Service Discovery Theory
+- DNS service is an "addon" launched automatically
+- Addons are in /etc/lubernetes/addons directory on master nodes
+- Used within a pod to find other services in the same clusters
+- Containers within a pod do not need service discovery
+- Namespaces are used to logically separate pods within a cluster
+
+Finding IP of the same service with different qualified names:
+$ host app2-service
+$ host app2-service.default
+$ host app2-service.default.svc.cluster.local
+Check namespaces:
+$ cat /etc/resolv.conf for configurations
+
+- Simply busybox shell:
+$ kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
+
+### Lecture 49 - Service Discovery Demo
+- Standard: Create a DB pod, a service, secrets, a deployment, etc...
+- Testing service discovery:
+1. kubectl get services # Get the <service_name> of interest
+2. Start busybox with active shell(see command above)
+3. nslookup <service_name>
+- Easy way to find info about the service
