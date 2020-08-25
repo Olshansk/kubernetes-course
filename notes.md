@@ -230,3 +230,41 @@ $ kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
 2. Start busybox with active shell(see command above)
 3. nslookup <service_name>
 - Easy way to find info about the service
+
+### Lecture 50 - Config Map theory
+- ConfigMap are not secrets
+- One use case: A set of key-value pairs
+- Another use case: full configuration files
+- ConfigMap can be a mounted using volumes (i.e. inject into container at some path)
+- Create configmap:
+$ kubectl create configmap app-config --from-file=filename
+
+- Use configmap with volumes:
+-- volumeMount: specify `name` & `mountPath`
+-- volume description: specify `name` and `configMap`
+
+- Use configmap with env variables:
+-- Create an env variable with a name and `valueFrom`
+-- valueFrom uses `configMapKeyRef`
+
+- Bash reminder to echo multiple lines
+$ cat <<EOF> filename.txt
+line 1
+line 2
+EOF
+
+### Lecture 51 - Config Map Demo
+$ kubectl get configmaps
+$ kubectl create configmap nginx-config --from-file=configmap/reverseproxy.conf
+$ kubectl get configmap nginx-config -o yaml
+
+Configuration in pod description:
+- Specify `volumeMounts` in the `containers` section
+- Specify `volumes` in the section below
+
+Checking by going into container:
+$ kubectl exec -it helloworld-nginx bash
+Catting the file path at the mounted volume path:
+$ cat /etc/nginx/conf.d/reverseproxy.conf
+
+Overall: Config files allow injection of configuration files or configuration data.
