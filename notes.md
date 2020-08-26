@@ -268,3 +268,21 @@ Catting the file path at the mounted volume path:
 $ cat /etc/nginx/conf.d/reverseproxy.conf
 
 Overall: Config files allow injection of configuration files or configuration data.
+
+### Lecture 52 - Ingress Controller Theory
+- Allows inbound connections to cluster (note that apiVersion is in beta)
+- New `kind` of object: `Ingress`
+- Ingress is an alternative to:
+-- External LoadBalancer
+-- nodeports
+- Ingress controller can be custom or use one of the default kubectl ones
+- Ingress types of rule:
+-- Specify pod depending on host
+-- Specify pod depending on path
+
+### Lecture 53 - Ingress Controller Demo
+- Adding ingress to minikube:
+$ minikube addons enable ingress
+- Opens port 80 (http) and port 443 (https)
+- Recall `$minikube ip` to get the ip address
+$ curl $(minikube ip) -H 'Host: helloworld-v2.example.com'
