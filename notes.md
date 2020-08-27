@@ -286,3 +286,30 @@ $ minikube addons enable ingress
 - Opens port 80 (http) and port 443 (https)
 - Recall `$minikube ip` to get the ip address
 $ curl $(minikube ip) -H 'Host: helloworld-v2.example.com'
+
+
+### Lecture 54 - External DNS Theory
+- Ingress controllers can be used to reduce cost of LoadBalancers
+-- Common pattern: 1 load balancer for all external traffic and send it to an ingress controller
+- HTTP rules (host & prefix) can be used by ingress controller to route traffic
+
+External DNS:
+- Automatically creates new DNS record for every hostname in an EXTERNAL DNS server
+- External DNS providers supporteted; Google CloudDNS< CLoudFlare, DigitalOcean, etc...
+
+Flow of request:
+1. Pod containing External DNS reads ingress rules.
+1.1 This pod talks to external DNS server to create a record.
+2. Pod containing ingress controller reads ingress rules
+2.1 These are saved for a later date to forward requests accordingly.
+3. Request comes in from the internet and go to external DNS Server.
+3.1 External DNS returns IP Address of the load balancer.
+3.2 Internet request is forwarded to the load balanacer.
+3.2 Load balancer forwards request to ingress controller.
+3.3 Ingress controller takes care of the rest.
+* NOTE: The external dns server pod was only necessary in the configuration of
+  the first step but is not involved in ongoing network requests.
+
+### Lecture 55 - External DNS Theory
+- `kubectl apply` can be used instead of `kubectl create` if we may want to modify configs in yaml file later
+-- If something already exists and you run apply, it doesn't error (as it would with create).
