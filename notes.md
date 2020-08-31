@@ -313,3 +313,25 @@ Flow of request:
 ### Lecture 55 - External DNS Theory
 - `kubectl apply` can be used instead of `kubectl create` if we may want to modify configs in yaml file later
 -- If something already exists and you run apply, it doesn't error (as it would with create).
+
+### Lecture 56 - Volumes Theory
+- Volumes store data outside container
+- Container stop -> data is lost; make apps stateless.
+- Persistent volumes attach volumes to a container that exist after container stops.
+- Google Cloud volume plugin: Google Disk
+
+When creating a volume, need to use aws/gcp tool to create a volume and specify:
+- Size of volume
+- Availability zone
+- Etc...
+* Note the availability zone
+
+Creating pod with volume:
+- Define a container with `volumeMount` (`mountPath` + `name`)
+- Specify volumes in the container(`name` and `volumeId`)
+
+### Lecture 57
+* Demo used AWS
+* GCP: https://cloud.google.com/persistent-disk
+-- It has codelabs for postgresSQL database
+-- Codelabs for persistent disk data
