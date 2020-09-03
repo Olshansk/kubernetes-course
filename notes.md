@@ -335,3 +335,38 @@ Creating pod with volume:
 * GCP: https://cloud.google.com/persistent-disk
 -- It has codelabs for postgresSQL database
 -- Codelabs for persistent disk data
+
+### Lecture 58 - Volumes and autoprovisioning
+- Documentation at http://kubernetes.io/docs/user-guide/persistent-volumes/
+- All the different types available here: https://kubernetes.io/docs/concepts/storage/storage-classes/#parameters
+- kubernetes plugin can autoprovision storage
+1. Object of kind `StorageClass`
+- Specify `type`, `zone` and `provisioner`
+2. Object of kind `PersistentVolumeClaim`
+- Specifies size and such...
+
+### [Incomplete] Lecture 59 - wordpress with volume
+TODO: Translate all AWS commands to GCP.
+
+- The GCP to AWS conversions were kind of hard...
+-- StorageClass: `kubernetes.io/aws-ebs` -> `kubernetes.io/gce-pd`
+-- Cmdline: Use `gcloud` instead of `aws`
+-- NFS: `aws efs create-file-system` ->
+
+Continue by going here:
+https://console.cloud.google.com/networking/networks/add?project=market-navigator-281018
+gcloud filestore instances create wordpressvolume   --description="kubernetes course testing wordpress volume" --file-share=name=WORDPRESS_VOUME,capacity=1TB   --network=name=us-central1 --zone=us-west1-a
+
+### Lecture 60 - Pod presets Theory
+- Inject information into pod at runtime (secrets, configmaps, volumes, env variables, etc...)
+- For `EnvVariables` & `VolumeMounts`, `PodPresets` applies to all containers in pod
+- Easy way to avoid having to copy-paste the same configs for all pods sharing configurations
+
+### [Incomplete] Lecture 61 - Pod presets Demo
+TODO: Get PodPresets working on minikube.
+
+$ kubectl get pp
+$ kubectl create -f <pod-presets.yaml>
+
+When starting the minikube cluster, we need:
+$ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota,PodPreset
