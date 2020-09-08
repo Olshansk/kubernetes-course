@@ -370,3 +370,15 @@ $ kubectl create -f <pod-presets.yaml>
 
 When starting the minikube cluster, we need:
 $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota,PodPreset
+
+### Lecture 62 - StatefulSets Theory
+- StatefulSets (originally called Pet Sets) are used to run stateful applications
+- Allow for a stable pod name (instead of podname-<randomstring>)
+- Stateful apps allow stable storage with volumes based on number: podname-<stable_number>
+- Stateful pods are not terminated in a random order:
+    - Scaling up: Pods restart in order: 0 to n-1
+    - Scaling down: Pods restart in reverse order: n-1 to 0
+
+### Lecture 63 - StatefulSets Demo
+- StatefulSets can be used for stateful apps (i.e. Cassandra) where an env variable
+  needs to point to a very specific pod name.
