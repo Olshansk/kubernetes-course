@@ -382,3 +382,14 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 ### Lecture 63 - StatefulSets Demo
 - StatefulSets can be used for stateful apps (i.e. Cassandra) where an env variable
   needs to point to a very specific pod name.
+
+### Lecture 64 - Daemon sets
+- Guarantee exactly one pod of some type on every kubernetes node
+- Use cases:
+-- Logging aggreagator
+-- Monitoring
+-- Load balancers
+
+### Lecture 65 - Resource usage monitoring
+- "Heapster" enables monitoring and expose cluster metrics via REST endpoint
+- Need a node with 3 pods: Heapster pod, InfluxDB pod, Grafan Pod
