@@ -393,3 +393,15 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 ### Lecture 65 - Resource usage monitoring
 - "Heapster" enables monitoring and expose cluster metrics via REST endpoint
 - Need a node with 3 pods: Heapster pod, InfluxDB pod, Grafan Pod
+
+### Lecture 68 - Autoscaling
+- Kubernetes supports autoscaling for `Deployments`, `ReplicationController`, or `ReplicaSet`
+- Must start cluster with configurations `ENABLE_CUSTOM_METRICS=true`
+- `horizontal-pod-austoscaler-sync-period` (defaults to checking heapster every 30 seconds)
+- Update the `container` spec with the `resources: requests: cpu: 200m` config
+- Must specify min/max replica counts
+- Must specify target CPU/memory utilization
+
+### Lecture 69 - Autoscaling Demo
+- Tip for testing: create a bash loop running a bunch of `wget` requests until
+  actual usage exceeds target usage.
