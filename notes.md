@@ -405,3 +405,13 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 ### Lecture 69 - Autoscaling Demo
 - Tip for testing: create a bash loop running a bunch of `wget` requests until
   actual usage exceeds target usage.
+
+### Lecture 70 - Affinity Theory
+- Create rules that are `preferences` rather than `requirments`.
+-- Specify a node label, but it would only be a nice-to-have.
+- Available options: Node/Pod Affinity/anti-affinity
+- Specify `weight` for `preferred rules` to change importance. Higher score -> precedence.
+
+### Lecture 71 - Affinity demo
+- Get nodes: `kubectl get nodes`
+- Label a node: `kubectl label node <node-name> key=value`
