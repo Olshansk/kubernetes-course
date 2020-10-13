@@ -415,3 +415,9 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 ### Lecture 71 - Affinity demo
 - Get nodes: `kubectl get nodes`
 - Label a node: `kubectl label node <node-name> key=value`
+
+### Lecture 72 - Interpod Affinity Theory
+- Useful for co-located pods (i.e. two pods are always on the same node).
+-- Use case: redis cache pod is in the same node as server pod
+- If `podAffinity` filters match, pods are scheduled on nodes with matching `topologyKey`
+- Pod `anti-affinity` is also an option
