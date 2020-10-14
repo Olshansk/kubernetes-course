@@ -421,3 +421,11 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 -- Use case: redis cache pod is in the same node as server pod
 - If `podAffinity` filters match, pods are scheduled on nodes with matching `topologyKey`
 - Pod `anti-affinity` is also an option
+
+### Lecture 75: Taints and Tolerations
+- Opposite of affinity to avoid specific pods/nodes
+- `Tolerations`: Label applied on pod
+- `Taints`: Label applied on a node
+- Example command: `kubectl taint nodes <node_name> key=value:NoSchedule`
+- Taints do not apply to pods already running except for `NoExecute`.
+- Lots of options to tain by hardware, location, user, etc...
