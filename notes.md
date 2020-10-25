@@ -429,3 +429,8 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 - Example command: `kubectl taint nodes <node_name> key=value:NoSchedule`
 - Taints do not apply to pods already running except for `NoExecute`.
 - Lots of options to tain by hardware, location, user, etc...
+
+### Lecture 79: Postgres demo
+- From lecture: https://github.com/CrunchyData/postgres-operator
+- Another good reference: https://github.com/GoogleCloudPlatform/gke-cloud-sql-postgres-demo
+- Kind of a boring lecture but following the READMe should be enough....
