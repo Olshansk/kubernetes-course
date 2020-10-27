@@ -434,3 +434,16 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 - From lecture: https://github.com/CrunchyData/postgres-operator
 - Another good reference: https://github.com/GoogleCloudPlatform/gke-cloud-sql-postgres-demo
 - Kind of a boring lecture but following the READMe should be enough....
+
+### Lecture 80 - Kubernetes Master service
+- `kubectl` (authorized) -> Kube API server (REST service on master components)
+- Other master components:
+-- Scheduler
+-- Controllers (replica controller, deployment, etc...)
+- Non-master components:
+-- Each node has a `kublet`
+-- Each node has many pods
+-- Each pod has many controllers
+-- `kublet` is triggered by the master kube API server
+- Other services:
+-- etcd is a distributed key-value data store (3-5 nodes)
