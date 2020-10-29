@@ -447,3 +447,17 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 -- `kublet` is triggered by the master kube API server
 - Other services:
 -- etcd is a distributed key-value data store (3-5 nodes)
+
+### Lecture 81 - Resource Quotas
+- `request capacity` and `capacity limits`
+- Recall: 200m = 200 millicpu (200 millicores); 205 of a CPU on the running node.
+- Admin can set defaults for a specific namespace.
+-- `requests.(cpu|mem|storage)` is max for all pods together
+-- `limits.(cpu|memory)` is max for all pods together
+- Admin can set max on deployment object liits (pods, configmaps, etc...)
+
+### Lecture 82 - namespaces
+- Virtual clusters; logical separation of clusters.
+- Intended for multiple teams/projects; don't need for a single person.
+- Quotas can be specified per namespace.
+- Note: consider restricting loadblancers because they cost a lot of money.
