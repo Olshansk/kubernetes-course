@@ -461,3 +461,20 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 - Intended for multiple teams/projects; don't need for a single person.
 - Quotas can be specified per namespace.
 - Note: consider restricting loadblancers because they cost a lot of money.
+
+### Lecture 84 - User Management Theory
+- `Normal User`
+-- Used to access the user externally (e.g. kubectl)
+-- Not managed using objects
+-- Access is limited through authorization
+- `Service User`
+-- Authenticate within the cluster (e.g. inside pod or kubelete)
+-- Managed like secrets
+
+### Lecture 85 - User Management Demo
+1. `$ minikube ssh`
+2. Create key using `openssl req` command
+3. Create certificate using `openssl x509` command
+5. Exit ssh session.
+4. Copy key & certificate to ~/.minikube/<name>{.key,.crt}.
+6. Append new configs to ~/.kube/config (see more detailed instructions).
