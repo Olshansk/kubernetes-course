@@ -478,3 +478,21 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 5. Exit ssh session.
 4. Copy key & certificate to ~/.minikube/<name>{.key,.crt}.
 6. Append new configs to ~/.kube/config (see more detailed instructions).
+
+### Lecture 86 - RBAC theory
+- `Node` auth module: requests made by `kubeletes`
+- `ABAC` auth module: policies & attributes.
+- `RBAC` auth module: role based access control (dynamic config policities).
+-- `authorization-mode` = RBAC.
+- `Webhooks` auth module:
+-`minikube`: $minikube start --extra-config=apiserver.Authorization.Mode=RBAC
+- namespacing: `Role` for a single namespace or `ClusterRole` for all namespaces
+
+### Lecture 87 - RBAC Demo
+- Instructions to create a new user are at users/README.md.
+- Recall contexts:
+-- $ kubectl config get-contexts
+-- $ kubectl config set-context <context-name> --cluster=<cluster_name> --user <user_name>
+- `Role` defines the types of `verbs` one can do on different `resources`
+- `RoleBinding` links a `Role` to a specific `user`.
+ 
