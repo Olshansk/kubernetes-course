@@ -495,4 +495,22 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 -- $ kubectl config set-context <context-name> --cluster=<cluster_name> --user <user_name>
 - `Role` defines the types of `verbs` one can do on different `resources`
 - `RoleBinding` links a `Role` to a specific `user`.
- 
+
+### Lecture 88 - Networking
+- `container-to-container`: within a pod through localhost + port number
+- `pod-to-service`: DNS + NodePort
+- `external-to-service`: LoadBalancer + NodePort
+- `pod-to-pod`: communicate via pod IP addresses.
+- Single cluster can't have more than 50 notes.
+- Many different alternatives/options to handle networking (e.g. Flannel)
+
+### Lecture 89 - Node Maintenance
+- `NodeController` does the followings:
+-- Keeps list of NodeSelector
+-- Assigns IP space
+-- Monitors health of nodes and handles rescheduling if necessary
+- Adding new node
+-- `kubelet` attempts self registration
+-- Adds labels and metadata to the new node.
+- Graceful node drainage: $ kubectl  drain nodename --frace-period=600
+- Forced node drainage: $ kubectl  drain nodename --force
