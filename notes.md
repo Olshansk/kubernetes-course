@@ -514,3 +514,12 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 -- Adds labels and metadata to the new node.
 - Graceful node drainage: $ kubectl  drain nodename --frace-period=600
 - Forced node drainage: $ kubectl  drain nodename --force
+
+### Lecture 90 - High Availability (HA)
+- etcd (distributed key-value store) used to manager multiple master NodeSelector
+  by the load balancer.
+- minikube is a 1 node cluster (no need for HA)
+
+### Lecture 91 - TLS on ELB
+- Cloud specific features (e.g. TLS termination in AWS ) can be configured with kube
+- Use Kubernetes `Annotation` - many different types.
