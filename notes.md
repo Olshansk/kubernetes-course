@@ -523,3 +523,29 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 ### Lecture 91 - TLS on ELB
 - Cloud specific features (e.g. TLS termination in AWS ) can be configured with kube
 - Use Kubernetes `Annotation` - many different types.
+
+### Lecture 95 - Admission Controllers
+- A lot of different pro/extensive features:
+-- Object mutation.
+-- Webhooks.
+-- Validation
+-- Node restrictions.
+-- Node defaults.
+
+### Lecture 96 - Pod security theory
+- Enable/disable root mode.
+- Specify UID/GUID for processes.
+- `PodSecurityPolicies`
+-- System process
+-- User process
+
+### Lecture 97 - Pod security Demo
+- Need to enable `--extra-config=PodSecurityPolicy` when starting minikube
+- In the deployment spec, specify `kubeAPIServer` of kind `Cluster`
+- Object of kind `PodSecurityPolicy` that must be `privileged`
+-- spec must define all privelege related documents
+-- specify `rules` in an object of type `ClusterRole`
+-- `ClusterRole` are bound using objects of type `RoleBindging`
+- If `Dockerfile` contains `USER app`
+-- Kubernetes cannot check the `UID` of `app`. Even if `app` was a privelerged,
+   user, it would still error.
