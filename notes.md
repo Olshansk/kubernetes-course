@@ -549,3 +549,16 @@ $ minikube start --extra-config=apiserver.enable-admission-plugins=NamespaceLife
 - If `Dockerfile` contains `USER app`
 -- Kubernetes cannot check the `UID` of `app`. Even if `app` was a privelerged,
    user, it would still error.
+
+### Lecture 98 - etcd
+- Distributed
+- Reliable
+- Fast (10k writes / second)
+- Consensus algorithm: RAFT
+- Heartbit timeout needs to be managed if etcd spans multiple data centers
+- etcd requires quoram on writes
+
+### Lecture 98 - Raft Consensus Algorithm
+- Similar fault-taulrence as `Paxos`
+- Amazing visualization: https://raft.github.io/
+- Elect a leader and all the followers
